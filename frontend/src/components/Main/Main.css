@@ -1,0 +1,21 @@
+.object{
+    padding-left: 20%;
+    text-align: center;
+    
+}
+.distance{
+    padding-right: 20%;
+    text-align: center;
+}
+
+.common{
+    background-image: linear-gradient(lightblue,lightpink );
+    border-radius: 15px;
+    padding-bottom: 5%;
+}
+
+.buttons{
+    margin: auto;
+    width: 30%;
+    height: 50%;
+}
