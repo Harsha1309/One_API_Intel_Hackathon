@@ -3,8 +3,8 @@ import "./Main.css";
 
 const Main = () => {
   const [list, setList] = useState([
-    { id: 1, text: "Table", distance: 2.0 },
-    { id: 2, text: "Chair", distance: 3.0 },
+    { id: 1, text: "Refrigerator", distance: 2.0 },
+    { id: 2, text: "Chair", distance: 2.0 },
     { id: 3, text: "Stair", distance: 3.0 },
   ]);
 
@@ -12,6 +12,7 @@ const Main = () => {
   const [lastWarningTime, setLastWarningTime] = useState(0);
 
   const [infoMode, setInfoMode] = useState(false);
+  const [infoImage, setInfoImage] = useState("");
 
   useEffect(() => {
     let interval;
@@ -38,6 +39,7 @@ const Main = () => {
       speakAllInformation();
     } else {
       window.speechSynthesis.cancel();
+      setInfoImage(""); // Clear the info image when infoMode is false
     }
   }, [infoMode]);
 
@@ -54,6 +56,7 @@ const Main = () => {
 
   const handleStartInfoMode = () => {
     setInfoMode(true);
+    setInfoImage('Speaking.jpg'); // Set the image URL here
   };
 
   const handleStopInfoMode = () => {
@@ -61,8 +64,10 @@ const Main = () => {
   };
 
   return (
-    <div>
-      
+    <>
+      <h1 className="text-white mt-5 pt-5 text-center">Drishti - Visual Aid Navigation </h1>
+      {/* <img className="text-center mt-2" src="thumb.jpg" style={{height:'2  00px', width:'300px',marginLeft:'40%'}}/> */}
+    <div className="main">
       <div className="row">
         <div className="col-6 object">
           <div className="common">
@@ -81,11 +86,31 @@ const Main = () => {
           </div>
         </div>
       </div>
+      <div className="info-container mt-4">
+        {infoMode && (
+          <div style={{ display: 'inline' }}>
+            {infoImage && <img src={infoImage} alt="Object Image" style={{ height: '200px', width: '200px', marginLeft: '30%', }} />}
+          </div>
+        )}
+      </div>
       <div className="buttons mt-4">
-      <button type="button" className="btn btn-info mx-2"  onClick={handleStartInfoMode}>Start Info Mode</button>
-      <button type="button" className="btn btn-info mx-2" onClick={handleStopInfoMode}>Cancel Info Mode</button>
+        <button
+          type="button"
+          className="btn btn-info mx-2"
+          onClick={handleStartInfoMode}
+        >
+          Start Info Mode
+        </button>
+        <button
+          type="button"
+          className="btn btn-info mx-2"
+          onClick={handleStopInfoMode}
+        >
+          Cancel Info Mode
+        </button>
       </div>
     </div>
+    </>
   );
 };
 
